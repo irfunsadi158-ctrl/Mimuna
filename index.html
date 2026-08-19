@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Maimuna Srabonti Sinha ❤️</title>
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ff4d6d;
+      --secondary: #c9184a;
+      --accent: #ff758f;
+      --gold: #ffb703;
+      --dark: #0f051d;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(ellipse at bottom, #2b0938 0%, #0d021a 70%, #05000a 100%);
+      color: #fff;
+      font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 20px 15px;
+    }
+
+    /* Floating background hearts/stars */
+    .bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: rgba(255, 77, 109, 0.25);
+      animation: floatUp 8s linear infinite;
+      font-size: 1.2rem;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) scale(0.6) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .main-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    /* --- STEP 0: TIME LOCK SCREEN (রাত ১২টার আগে) --- */
+    #lockScreen {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lock-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      animation: gentleBounce 1.5s infinite alternate ease-in-out;
+    }
+
+    .lock-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff4d6d, #ffb3c6, #ff758f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .lock-desc {
+      font-size: 1.2rem;
+      color: #e0d0db;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .countdown-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      padding: 12px 6px;
+      border-radius: 14px;
+    }
+
+    .countdown-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Poppins', sans-serif;
+      display: block;
+    }
+
+    .countdown-lbl {
+      font-size: 0.8rem;
+      color: #ffccd5;
+    }
+
+    /* --- STEP 1: INITIAL GIFT SCREEN (রাত ১২টার পর) --- */
+    #introScreen {
+      display: none;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .crown-icon {
+      font-size: 2.2rem;
+      margin-bottom: 5px;
+      display: inline-block;
+      animation: floatCrown 2.5s ease-in-out infinite;
+    }
+
+    .intro-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffccd5;
+      margin-bottom: 8px;
+    }
+
+    .name-highlight {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff4d6d, #ffb3c6, #ff758f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 25px;
+      text-shadow: 0 0 20px rgba(255, 77, 109, 0.4);
+    }
+
+    .gift-box-btn {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 10px auto 25px auto;
+      background: linear-gradient(135deg, #ff4d6d, #800f2f);
+      border-radius: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 3.5rem;
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.45);
+      animation: pulseGlow 2s infinite, gentleBounce 1.5s ease-in-out infinite alternate;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .gift-box-btn:active {
+      transform: scale(0.92);
+    }
+
+    .tap-hint {
+      font-size: 1.05rem;
+      color: #ffccd5;
+      animation: blinkText 1.8s infinite;
+    }
+
+    /* --- STEP 2: CELEBRATION CARD SCREEN --- */
+    #celebrationScreen {
+      display: none;
+      animation: openBook 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .card {
+      background: rgba(22, 9, 36, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 117, 143, 0.35);
+      border-radius: 30px;
+      padding: 35px 22px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 77, 109, 0.25);
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: linear-gradient(45deg, #ff4d6d, transparent, #ffb703, transparent, #ff758f);
+      border-radius: 32px;
+      z-index: -1;
+      opacity: 0.4;
+    }
+
+    .bday-tag {
+      display: inline-block;
+      background: rgba(255, 77, 109, 0.2);
+      border: 1px solid rgba(255, 77, 109, 0.4);
+      color: #ff99ac;
+      padding: 5px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .main-name {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+      margin-bottom: 4px;
+    }
+
+    .dob-badge {
+      font-size: 0.95rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Live Age/Moments Counter */
+    .timer-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 14px 10px;
+      margin: 18px 0 24px 0;
+    }
+
+    .timer-title {
+      font-size: 0.85rem;
+      color: #ffccd5;
+      margin-bottom: 8px;
+    }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .time-unit {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 8px 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 77, 109, 0.2);
+    }
+
+    .time-num {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ff758f;
+      display: block;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .time-label {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+
+    /* Romantic Letter Body */
+    .romantic-letter {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid #ff4d6d;
+      border-radius: 0 16px 16px 0;
+      padding: 16px 14px;
+      text-align: left;
+      margin-bottom: 24px;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #f3e8ee;
+      font-weight: 300;
+    }
+
+    .romantic-letter p {
+      margin-bottom: 12px;
+    }
+    .romantic-letter p:last-child {
+      margin-bottom: 0;
+    }
+
+    .romantic-letter .highlight-word {
+      color: #ff758f;
+      font-weight: 600;
+    }
+
+    /* Interactive Action Buttons */
+    .btn-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 20px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+      transition: all 0.25s ease;
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    .action-btn:active {
+      transform: scale(0.96);
+    }
+
+    .action-btn.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: none;
+      color: #ffccd5;
+    }
+
+    /* Secret message modal popup */
+    #secretModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #2b0b38, #150221);
+      border: 1px solid #ff758f;
+      border-radius: 24px;
+      padding: 28px 22px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: popInModal 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 50px rgba(255, 77, 109, 0.4);
+    }
+
+    .modal-content h3 {
+      color: #ff758f;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .modal-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #f7e6ec;
+      margin-bottom: 20px;
+    }
+
+    .close-modal-btn {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Keyframes */
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(255, 77, 109, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+    }
+
+    @keyframes gentleBounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes openBook {
+      0% { opacity: 0; transform: scale(0.85) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes popInModal {
+      0% { opacity: 0; transform: scale(0.75); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes blinkText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts Background -->
+  <div class="bg-elements" id="bgElements"></div>
+
+  <div class="main-wrapper">
+
+    <!-- SCREEN 0: TIME-LOCK COUNTDOWN -->
+    <div id="lockScreen">
+      <div class="lock-icon">⏳</div>
+      <span class="lock-name">মাইমুনা শ্রাবন্তী সিনহা</span>
+      <p class="lock-desc">
+        রাত ১২টা বাজার পরে খুলবে। ✨
+      </p>
+      
+      <div class="countdown-grid">
+        <div class="countdown-card">
+          <span class="countdown-num" id="lockHours">00</span>
+          <span class="countdown-lbl">ঘণ্টা</span>
+        </div>
+        <div class="countdown-card">
+          <span class="countdown-num" id="lockMinutes">00</span>
+          <span class="countdown-lbl">মিনিট</span>
+        </div>
+        <div class="countdown-card">
+          <span class="countdown-num" id="lockSeconds">00</span>
+          <span class="countdown-lbl">সেকেন্ড</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: THE GIFT BOX -->
+    <div id="introScreen">
+      <div class="crown-icon">👑</div>
+      <div class="intro-title">আজকের এই বিশেষ দিনটি শুধুই তোমার...</div>
+      <h2 class="name-highlight">মাইমুনা শ্রাবন্তী সিনহা</h2>
+      
+      <div class="gift-box-btn" onclick="revealBirthdaySurprise()">
+        🎁
+      </div>
+      
+      <p class="tap-hint">✨ এই গিফট বক্সটিতে আলতো করে স্পর্শ করো ✨</p>
+    </div>
+
+    <!-- SCREEN 2: CELEBRATION & ROMANTIC CARD -->
+    <div id="celebrationScreen">
+      <div class="card">
+        <div class="card-header">
+          <span class="bday-tag">✨ Happy Birthday My Queen ✨</span>
+          <h1 class="main-name">মাইমুনা শ্রাবন্তী সিনহা</h1>
+          <div class="dob-badge">
+            <span>📅 ২০ আগস্ট, ২০০৭</span> • <span>🎂 চিরসবুজ ভালোবাসা</span>
+          </div>
+        </div>
+
+        <!-- Live Age/Moments Counter -->
+        <div class="timer-box">
+          <div class="timer-title">💖 পৃথিবীর বুকে তোমার পদার্পণের মুহূর্তগুলো:</div>
+          <div class="timer-grid">
+            <div class="time-unit">
+              <span class="time-num" id="yearsCount">--</span>
+              <span class="time-label">বছর</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="daysCount">--</span>
+              <span class="time-label">দিন</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="hoursCount">--</span>
+              <span class="time-label">ঘণ্টা</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="secondsCount">--</span>
+              <span class="time-label">সেকেন্ড</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Heartfelt Romantic Letter -->
+        <div class="romantic-letter">
+          <p>
+            প্রিয় <span class="highlight-word">শ্রাবন্তী</span>,
+          </p>
+          <p>
+            আজকের এই শুভ দিনে পৃথিবী তোমাকে উপহার হিসেবে পেয়েছিল, আর আমি পেয়েছি আমার জীবনের সবচেয়ে সুন্দর পূর্ণতা। তোমার ওই মিষ্টি হাসি আমার হাজারো ক্লান্তির অবসান ঘটায়।
+          </p>
+          <p>
+            তুমি শুধু আমার ভালোবাসা নও, তুমি আমার প্রতিটি ভাবনার সুখের ঠিকানা। জীবনের প্রতিটা বাঁকে এভাবেই তোমার হাত ধরে পাশাপাশি হেঁটে যেতে চাই।
+          </p>
+          <p style="text-align: right; color: #ff99ac; font-weight: 600; margin-top: 10px;">
+            — অনন্ত ভালোবাসাসহ, শুধু তোমার ❤️
+          </p>
+        </div>
+
+        <!-- Interactive Actions -->
+        <div class="btn-actions">
+          <button class="action-btn" onclick="burstLoveExplosion()">
+            <span>💖 আরও একঝাঁক ভালোবাসা নাও 💖</span>
+          </button>
+          <button class="action-btn secondary" onclick="openSecretModal()">
+            <span>💌 একটি গোপন চিরকুট</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECRET MESSAGE MODAL -->
+  <div id="secretModal" onclick="closeSecretModal(event)">
+    <div class="modal-content">
+      <div style="font-size: 2.5rem; margin-bottom: 10px;">🌹</div>
+      <h3>আমার মন থেকে...</h3>
+      <p>
+        "চাঁদের চেয়েও সুন্দর তোমার ওই চোখ দুটো, আর ফুলের চেয়েও পবিত্র তোমার ওই মন। যতদিন এই হৃদস্পন্দন থাকবে, ততদিন প্রতিটি ধুকপুকানিতে তোমার নামই বাজবে, শ্রাবন্তী।"
+      </p>
+      <button class="close-modal-btn" onclick="document.getElementById('secretModal').style.display='none'">ভালোবাসা গ্রহণ করলাম 💕</button>
+    </div>
+  </div>
+
+  <script>
+    const bgContainer = document.getElementById('bgElements');
+    const hearts = ['❤️', '💖', '✨', '🌸', '💕', '🌷'];
+    for (let i = 0; i < 22; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating-heart';
+      el.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (5 + Math.random() * 6) + 's';
+      el.style.animationDelay = (Math.random() * 5) + 's';
+      el.style.fontSize = (0.9 + Math.random() * 1.2) + 'rem';
+      bgContainer.appendChild(el);
+    }
+
+    const targetUnlockTime = new Date('2026-08-20T00:00:00').getTime();
+    let isUnlocked = false;
+
+    function checkLockStatus() {
+      const now = new Date().getTime();
+      const distance = targetUnlockTime - now;
+
+      if (distance <= 0) {
+        if (!isUnlocked) {
+          isUnlocked = true;
+          document.getElementById('lockScreen').style.display = 'none';
+          document.getElementById('introScreen').style.display = 'block';
+        }
+        return;
+      }
+
+      const hours = Math.floor(distance / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('lockHours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('lockMinutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('lockSeconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(checkLockStatus, 1000);
+    checkLockStatus();
+
+    function revealBirthdaySurprise() {
+      document.getElementById('introScreen').style.display = 'none';
+      document.getElementById('celebrationScreen').style.display = 'block';
+      celebrateConfetti();
+    }
+
+    function celebrateConfetti() {
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+      const end = Date.now() + (3.5 * 1000);
+      const colors = ['#ff4d6d', '#ff758f', '#ffb703', '#ffffff', '#ff0a54'];
+      (function frame() {
+        confetti({ particleCount: 4, angle: 60, spread: 60, origin: { x: 0, y: 0.7 }, colors: colors });
+        confetti({ particleCount: 4, angle: 120, spread: 60, origin: { x: 1, y: 0.7 }, colors: colors });
+        if (Date.now() < end) { requestAnimationFrame(frame); }
+      }());
+    }
+
+    function burstLoveExplosion() {
+      celebrateConfetti();
+      confetti({ particleCount: 60, spread: 100, origin: { y: 0.5 }, shapes: ['circle'], colors: ['#ff1493', '#ff69b4', '#ff4d6d', '#ffccd5'] });
+    }
+
+    const birthDate = new Date('2007-08-20T00:00:00');
+    function updateLiveAgeCounter() {
+      const now = new Date();
+      const diffMs = now - birthDate;
+      const totalSeconds = Math.floor(diffMs / 1000);
+      const totalDays = Math.floor(totalSeconds / (3600 * 24));
+      const years = Math.floor(totalDays / 365.25);
+      const remainingDays = Math.floor(totalDays % 365.25);
+      const remainingHours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const remainingSeconds = totalSeconds % 60;
+      document.getElementById('yearsCount').innerText = years;
+      document.getElementById('daysCount').innerText = remainingDays;
+      document.getElementById('hoursCount').innerText = remainingHours;
+      document.getElementById('secondsCount').innerText = remainingSeconds;
+    }
+    setInterval(updateLiveAgeCounter, 1000);
+    updateLiveAgeCounter();
+
+    function openSecretModal() {
+      document.getElementById('secretModal').style.display = 'flex';
+      confetti({ particleCount: 40, spread: 50, origin: { y: 0.5 } });
+    }
+    function closeSecretModal(e) {
+      if (e.target.id === 'secretModal') { document.getElementById('secretModal').style.display = 'none'; }
+    }
+  </script>
+</body>
+</html>
