@@ -42,7 +42,6 @@
       padding: 20px 15px;
     }
 
-    /* Floating background hearts/stars */
     .bg-elements {
       position: fixed;
       top: 0;
@@ -80,7 +79,7 @@
       margin: auto;
     }
 
-    /* --- STEP 0: TIME LOCK SCREEN (রাত ১২টার আগে) --- */
+    /* --- STEP 0: TIME LOCK SCREEN --- */
     #lockScreen {
       background: var(--glass);
       backdrop-filter: blur(16px);
@@ -144,7 +143,7 @@
       color: #ffccd5;
     }
 
-    /* --- STEP 1: INITIAL GIFT SCREEN (রাত ১২টার পর) --- */
+    /* --- STEP 1: INITIAL GIFT SCREEN --- */
     #introScreen {
       display: none;
       background: var(--glass);
@@ -223,7 +222,7 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 117, 143, 0.35);
       border-radius: 30px;
-      padding: 35px 22px;
+      padding: 35px 18px;
       text-align: center;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 77, 109, 0.25);
       position: relative;
@@ -254,7 +253,7 @@
     }
 
     .main-name {
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: 700;
       line-height: 1.3;
       color: #fff;
@@ -273,36 +272,36 @@
       gap: 6px;
     }
 
-    /* Live Age/Moments Counter */
+    /* Live Age Counter (5 Units Grid) */
     .timer-box {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 18px;
-      padding: 14px 10px;
+      padding: 14px 8px;
       margin: 18px 0 24px 0;
     }
 
     .timer-title {
       font-size: 0.85rem;
       color: #ffccd5;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .timer-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
     }
 
     .time-unit {
-      background: rgba(0, 0, 0, 0.35);
-      padding: 8px 4px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 2px;
       border-radius: 10px;
-      border: 1px solid rgba(255, 77, 109, 0.2);
+      border: 1px solid rgba(255, 77, 109, 0.25);
     }
 
     .time-num {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #ff758f;
       display: block;
@@ -310,11 +309,10 @@
     }
 
     .time-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: #ccc;
     }
 
-    /* Romantic Letter Body */
     .romantic-letter {
       background: rgba(255, 255, 255, 0.03);
       border-left: 3px solid #ff4d6d;
@@ -340,7 +338,6 @@
       font-weight: 600;
     }
 
-    /* Interactive Action Buttons */
     .btn-actions {
       display: flex;
       flex-direction: column;
@@ -377,7 +374,6 @@
       color: #ffccd5;
     }
 
-    /* Secret message modal popup */
     #secretModal {
       display: none;
       position: fixed;
@@ -426,7 +422,6 @@
       cursor: pointer;
     }
 
-    /* Keyframes */
     @keyframes pulseGlow {
       0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
       70% { box-shadow: 0 0 0 20px rgba(255, 77, 109, 0); }
@@ -436,6 +431,11 @@
     @keyframes gentleBounce {
       0% { transform: translateY(0); }
       100% { transform: translateY(-8px); }
+    }
+
+    @keyframes floatCrown {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-8px) rotate(4deg); }
     }
 
     @keyframes fadeInScale {
@@ -461,7 +461,6 @@
 </head>
 <body>
 
-  <!-- Floating Hearts Background -->
   <div class="bg-elements" id="bgElements"></div>
 
   <div class="main-wrapper">
@@ -519,19 +518,23 @@
           <div class="timer-title">💖 পৃথিবীর বুকে তোমার পদার্পণের মুহূর্তগুলো:</div>
           <div class="timer-grid">
             <div class="time-unit">
-              <span class="time-num" id="yearsCount">--</span>
+              <span class="time-num" id="yearsCount">0</span>
               <span class="time-label">বছর</span>
             </div>
             <div class="time-unit">
-              <span class="time-num" id="daysCount">--</span>
+              <span class="time-num" id="daysCount">0</span>
               <span class="time-label">দিন</span>
             </div>
             <div class="time-unit">
-              <span class="time-num" id="hoursCount">--</span>
+              <span class="time-num" id="hoursCount">0</span>
               <span class="time-label">ঘণ্টা</span>
             </div>
             <div class="time-unit">
-              <span class="time-num" id="secondsCount">--</span>
+              <span class="time-num" id="minsCount">0</span>
+              <span class="time-label">মিনিট</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-num" id="secondsCount">0</span>
               <span class="time-label">সেকেন্ড</span>
             </div>
           </div>
@@ -593,6 +596,7 @@
       bgContainer.appendChild(el);
     }
 
+    // টাইম-লক চেক (২০ আগস্ট রাত ১২:০০:০০)
     const targetUnlockTime = new Date('2026-08-20T00:00:00').getTime();
     let isUnlocked = false;
 
@@ -622,6 +626,7 @@
     checkLockStatus();
 
     function revealBirthdaySurprise() {
+      playSoftAudioChime();
       document.getElementById('introScreen').style.display = 'none';
       document.getElementById('celebrationScreen').style.display = 'block';
       celebrateConfetti();
@@ -643,21 +648,37 @@
       confetti({ particleCount: 60, spread: 100, origin: { y: 0.5 }, shapes: ['circle'], colors: ['#ff1493', '#ff69b4', '#ff4d6d', '#ffccd5'] });
     }
 
+    // নিখুঁত লাইভ মেমোরি ক্যালকুলেটর (বছর, দিন, ঘণ্টা, মিনিট, সেকেন্ড)
     const birthDate = new Date('2007-08-20T00:00:00');
+
     function updateLiveAgeCounter() {
       const now = new Date();
-      const diffMs = now - birthDate;
-      const totalSeconds = Math.floor(diffMs / 1000);
-      const totalDays = Math.floor(totalSeconds / (3600 * 24));
-      const years = Math.floor(totalDays / 365.25);
-      const remainingDays = Math.floor(totalDays % 365.25);
-      const remainingHours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-      const remainingSeconds = totalSeconds % 60;
+      
+      // পূর্ণ বছর গণনা
+      let years = now.getFullYear() - birthDate.getFullYear();
+      let lastBirthday = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate(), 0, 0, 0);
+      
+      if (now < lastBirthday) {
+        years--;
+        lastBirthday = new Date(now.getFullYear() - 1, birthDate.getMonth(), birthDate.getDate(), 0, 0, 0);
+      }
+
+      // শেষ জন্মদিন (আজকের রাত ১২:০০) থেকে অতিবাহিত নিখুঁত সময়
+      const diffMs = now - lastBirthday;
+      const totalSec = Math.floor(diffMs / 1000);
+
+      const days = Math.floor(totalSec / 86400);
+      const hours = Math.floor((totalSec % 86400) / 3600);
+      const minutes = Math.floor((totalSec % 3600) / 60);
+      const seconds = totalSec % 60;
+
       document.getElementById('yearsCount').innerText = years;
-      document.getElementById('daysCount').innerText = remainingDays;
-      document.getElementById('hoursCount').innerText = remainingHours;
-      document.getElementById('secondsCount').innerText = remainingSeconds;
+      document.getElementById('daysCount').innerText = days;
+      document.getElementById('hoursCount').innerText = hours;
+      document.getElementById('minsCount').innerText = minutes;
+      document.getElementById('secondsCount').innerText = seconds;
     }
+
     setInterval(updateLiveAgeCounter, 1000);
     updateLiveAgeCounter();
 
@@ -665,8 +686,42 @@
       document.getElementById('secretModal').style.display = 'flex';
       confetti({ particleCount: 40, spread: 50, origin: { y: 0.5 } });
     }
+
     function closeSecretModal(e) {
-      if (e.target.id === 'secretModal') { document.getElementById('secretModal').style.display = 'none'; }
+      if (e.target.id === 'secretModal') {
+        document.getElementById('secretModal').style.display = 'none';
+      }
+    }
+
+    let audioCtx = null;
+    function playSoftAudioChime() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, index) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (index * 0.12));
+          
+          gain.gain.setValueAtTime(0, audioCtx.currentTime + (index * 0.12));
+          gain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + (index * 0.12) + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (index * 0.12) + 1.2);
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          
+          osc.start(audioCtx.currentTime + (index * 0.12));
+          osc.stop(audioCtx.currentTime + (index * 0.12) + 1.2);
+        });
+      } catch (err) {}
     }
   </script>
 </body>
